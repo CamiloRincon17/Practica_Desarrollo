@@ -1,0 +1,43 @@
+.back-btn {
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+
+}
+/* ...existing code... */
+
+/* Home button */
+.home-btn a {
+  background-color: #1db954;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+  margin-right: 10px;
+  transition: background 0.2s;
+  display: inline-block;
+}
+.home-btn a:hover {
+  background-color: #14833b;
+}
+
+/* Search button */
+.search-btn a {
+  background-color: #535353;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+  transition: background 0.2s;
+  display: inline-block;
+}
+.search-btn a:hover {
+  background-color: #333;
+}
+/* ...existing code... */
