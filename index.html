@@ -9,6 +9,9 @@
       --bg:#fdeff2;
       --accent:#d63384;
     }
+    title{
+      font-size: 80px;
+    }
     * { box-sizing:border-box }
     body {
       margin:0;
@@ -334,32 +337,35 @@
 </head>
 <body>
   <div class="wrap">
-    <p class="lead" id="happy">¡Feliz cumpleaños!  🎁</p>
-    <div class="scene" id="scene">
-      <div class="gift-wrap" id="gift">
-        <div class="lid" id="lid"></div>
-        <div class="box">
-          <div class="ribbon-vert"></div>
-          <div class="ribbon-h"></div>
-          <div class="bow">🎀</div>
-          <div class="card-inside" id="cardInside">
-            <h2 id="insideText">¡Feliz cumpleaños, Ceilin! 🎉</h2>
-          </div>
-          <div class="video-container" id="videoContainer">
-            <iframe
-              width="560"
-              height="315"
-              src="https://www.youtube.com/embed/UBX8RjL_c3k?rel=0&controls=1"
-              title="YouTube video player"
-              frameborder="0"
-              allow="autoplay; encrypted-media"
-              allowfullscreen
-              style="border-radius:14px;box-shadow:0 4px 16px rgba(214,51,132,0.18);background:#000;">
-            </iframe>
-          </div>
+    <p class="lead" id="happy" style="font-size:2.5rem; font-weight:700; margin-bottom:28px;">¡Feliz cumpleaños!  🎁</p>
+    <div class="scene" id="scene" style="display:flex; flex-direction:column; align-items:center;">
+      <!-- Regalo SVG bonito y responsivo -->
+      <div id="giftSvg" style="width:200px; cursor:pointer; transition:transform 0.7s cubic-bezier(.2,.9,.25,1); margin-bottom:12px;">
+        <svg id="svgGift" viewBox="0 0 220 220" width="100%" height="100%">
+          <!-- Caja -->
+          <rect id="boxRect" x="30" y="70" width="160" height="120" rx="16" fill="#ffb6d5" stroke="#d63384" stroke-width="3"/>
+          <!-- Tapa -->
+          <rect id="lidRect" x="20" y="55" width="180" height="30" rx="8" fill="#ff4da6" stroke="#d63384" stroke-width="3"/>
+          <!-- Cinta vertical -->
+          <rect x="100" y="55" width="20" height="135" rx="8" fill="#ff67a6"/>
+          <!-- Cinta horizontal -->
+          <rect x="30" y="110" width="160" height="18" rx="6" fill="#ff67a6"/>
+          <!-- Lazo izquierdo -->
+          <path d="M110 55 Q70 10 80 55 Q90 80 110 55" fill="#ffb6d5" stroke="#d63384" stroke-width="2"/>
+          <!-- Lazo derecho -->
+          <path d="M110 55 Q150 10 140 55 Q130 80 110 55" fill="#ffb6d5" stroke="#d63384" stroke-width="2"/>
+          <!-- Centro del lazo -->
+          <ellipse cx="110" cy="55" rx="12" ry="10" fill="#ff4da6" stroke="#d63384" stroke-width="2"/>
+        </svg>
+      </div>
+      <div class="card-inside" id="cardInside">
+        <h2 id="insideText" style="margin-bottom:0; font-size:1.5rem;">
+          ¡Feliz cumpleaños, Ceilin! <span style="color:#ff67a6;">❤️</span>
+        </h2>
+        <div id="extraMessage" style="display:none; margin-top:18px; color:#d63384; font-size:1.15em; font-weight:500;">
+          🌸 Hoy brillas más que nunca — ¡feliz cumpleaños! 🎁
         </div>
       </div>
-      <div class="shadow" aria-hidden="true"></div>
       <canvas class="confetti" id="confetti"></canvas>
       <div class="balloons" id="balloons"></div>
     </div>
@@ -399,8 +405,8 @@
     const insideText = document.getElementById('insideText');
     const canvas = document.getElementById('confetti');
     const ctx = canvas.getContext('2d');
-    const videoContainer = document.getElementById('videoContainer');
-    const birthdayVideo = document.getElementById('birthdayVideo');
+    const lidRect = document.getElementById('lidRect');
+    let opened = false;
 
     function resizeCanvas(){
       canvas.width = innerWidth * devicePixelRatio;
@@ -447,41 +453,34 @@
     }
     update();
 
-    function boxCenter(){
-      const rect = gift.getBoundingClientRect();
-      return {x: rect.left + rect.width/2, y: rect.top + rect.height/3};
-    }
-
-    let opened = false;
     function openGift(){
       if(opened) return;
       opened = true;
-      lid.style.transform = 'rotateX(-75deg) translateZ(18px)';
-      gift.style.transform = 'translateY(-10px) scale(1.02)';
+      // Animar la tapa del regalo SVG
+      lidRect.setAttribute('transform', 'rotate(-45 110 70)');
       setTimeout(()=>{ 
         cardInside.classList.add('show'); 
-        // Mostrar el texto primero
         setTimeout(()=>{
-          // Oculta la línea del regalo
-          document.querySelector('.lid').style.display = 'none';
-          // Muestra el video
-          videoContainer.style.display = 'block';
-          birthdayVideo.play();
-        }, 3000); // Espera 3 segundos antes de mostrar el video
+          insideText.style.display = 'none';
+          document.getElementById('extraMessage').style.display = 'block';
+        }, 3000);
       }, 420);
 
-      const center = boxCenter();
+      // Centrar confeti en el SVG
+      const giftSvg = document.getElementById('giftSvg');
+      const rect = giftSvg.getBoundingClientRect();
+      const center = {x: rect.left + rect.width/2, y: rect.top + rect.height/2};
       spawn(center.x, center.y, Math.PI*1.6, 160);
       const rainInterval = setInterval(()=>{
-        const cx = center.x + (Math.random()-0.5)*220;
+        const cx = center.x + (Math.random()-0.5)*120;
         spawn(cx, center.y - 40, Math.PI*1.6, 18);
       }, 160);
       setTimeout(()=>{ clearInterval(rainInterval); }, 2400);
       releaseBalloons();
     }
-  
-    openBtn.addEventListener('click', openGift);
-    gift.addEventListener('click', openGift);
+
+    document.getElementById('openBtn').addEventListener('click', openGift);
+    document.getElementById('giftSvg').addEventListener('click', openGift);
 
     function releaseBalloons(){
       const container = document.getElementById('balloons');
@@ -495,9 +494,6 @@
         setTimeout(()=>b.remove(),10000);
       }
     }
-    document.querySelector('.lid').style.display = 'none';
-    // o
-    document.querySelector('.bow').style.display = 'none';
   </script>
 </body>
 </html>

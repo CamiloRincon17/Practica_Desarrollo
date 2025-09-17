@@ -1,0 +1,78 @@
+.NumAb{
+    font-size: 40px;
+    font-weight: 400;
+    color: #FB542B;
+    font-family: poppins, sans-serif;
+    box-sizing: border-box;
+    line-height: 46px;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    text-align: center;
+    pointer-events: auto;
+    text-overflow: ellipsis;
+    text-size-adjust: 100%;
+    text-wrap-mode: nowrap ;
+    white-space-collapse: collapse;
+    width: 175.84px;
+    height: auto;
+    -webkit-font-smoothing: antialiased;
+}
+.NumAb2{
+    font-size: 40px;
+    font-weight: 400;
+    color: #a0a5eb;
+    font-family: poppins, sans-serif;
+    box-sizing: border-box;
+    line-height: 46px;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    text-align: center;
+    pointer-events: auto;
+    text-overflow: ellipsis;
+    text-size-adjust: 100%;
+    text-wrap-mode: nowrap ;
+    white-space-collapse: collapse;
+    width: 100.84px;
+    height: auto;
+    -webkit-font-smoothing: antialiased;
+}
+.NumAb3{
+    font-size: 40px;
+    font-weight: 400;
+    color: #ffffff;
+    font-family: poppins, sans-serif;
+    box-sizing: border-box;
+    line-height: 46px;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    text-align: center;
+    pointer-events: auto;
+    text-overflow: ellipsis;
+    text-size-adjust: 100%;
+    text-wrap-mode: nowrap ;
+    white-space-collapse: collapse;
+    width: 100.84px;
+    height: auto;
+    -webkit-font-smoothing: antialiased;
+}
+.SizeColor{
+    font-size: 16px;
+    font-weight: 500;
+    color:  #FFFFFF;
+    margin-top: 8px;
+    font-family: Poppins, sans-serif;
+}
+.gb{
+    color: #a0a5eb;
+}
+.hour{
+    color: #ffffff;
+}
+body{
+    background-image: url(https://images.unsplash.com/photo-1751670346016-bda0dc756da9?q=80&w=1075&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+    background-size: cover;               /* que cubra toda la pantalla */
+      background-position: center;          /* centrada */
+      background-repeat: no-repeat;         /* que no se repita */
+      height: 100vh;                         /* ocupar toda la altura visible */
+      margin: 0;     
+}
